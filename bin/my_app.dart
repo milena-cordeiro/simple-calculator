@@ -7,32 +7,30 @@ import 'dart:io';
 void main() {
 print('Olá, eu sou uma calculadora');
 
-print('Digite o primeiro número:');
-var line = stdin.readLineSync(encoding: utf8);
-var num1 = double.parse(line ?? "0");
+var num1 = double.parse(lerConsole('Digite o primeiro número:'));
 
-print('Digite o segundo número:');
-line = stdin.readLineSync(encoding: utf8);
-var num2 = double.parse(line ?? "0");
+var num2 = double.parse(lerConsole('Digite o segundo número:'));
 
-print('informe a operação desejada:');
-line = stdin.readLineSync(encoding: utf8);
-var operation = line ?? "";
+var operation = lerConsole('informe a operação desejada: +, -, *, /');
 
-var result = 0.0;
+calculate(operation, num1, num2);
+}
+
+void calculate(operation, double num1, double num2) {
+  var result = 0.0;
 
 switch (operation) {
   case '+':
-    result = num1 + num2;
+    result = soma(num1, num2);
     break;
   case '-':
-    result = num1 - num2;
+    result = subtracao(num1, num2);
     break;
   case '*':
-    result = num1 * num2;
+    result = multiplicacao(num1, num2);
     break;
     case '/':
-    result = num1 / num2;
+    result = divisao(num1, num2);
     break;
   default:
   print('Operação inválida');
@@ -42,3 +40,26 @@ switch (operation) {
 print('Operação utilizada: $operation');
 print('O resultado é: $result');
 }
+
+String lerConsole(String texto) {
+  print(texto);
+  var line = stdin.readLineSync(encoding: utf8);
+  return line ?? "";
+}
+
+double soma(double num1, double num2) {
+  return num1 + num2;
+}
+
+double subtracao(double num1, double num2) {
+  return num1 - num2;
+}
+
+double multiplicacao(double num1, double num2) {
+  return num1 * num2;
+}
+
+double divisao(double num1, double num2) {
+  return num1 / num2;
+}
+
