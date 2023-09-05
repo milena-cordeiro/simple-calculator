@@ -7,9 +7,9 @@ import 'dart:io';
 void main() {
 print('Olá, eu sou uma calculadora');
 
-var num1 = double.parse(lerConsole('Digite o primeiro número:'));
+var num1 = readNumber('Digite o primeiro número:');
 
-var num2 = double.parse(lerConsole('Digite o segundo número:'));
+var num2 = readNumber('Digite o segundo número:');
 
 var operation = lerConsole('informe a operação desejada: +, -, *, /');
 
@@ -47,6 +47,16 @@ String lerConsole(String texto) {
   return line ?? "";
 }
 
+double readNumber(String texto) {
+  var number = double.tryParse(lerConsole(texto));
+ if(number == null) {
+   print('Número inválido');
+   return 0.0;
+ } else {
+   return number;
+ }
+}
+
 double soma(double num1, double num2) {
   return num1 + num2;
 }
@@ -60,6 +70,10 @@ double multiplicacao(double num1, double num2) {
 }
 
 double divisao(double num1, double num2) {
+  if(num2 == 0) {
+    print('Não é possível dividir por zero');
+    exit(0);
+  }
   return num1 / num2;
 }
 
